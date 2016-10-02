@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sample</title>
+</head>
+<body>
+  <p>Hello world!</p>
+  <p>hogehoge hugahuga</p>
+
+	<form>
+		<p><input type="text" name="body"></p>
+		<p><button id="postButton">送信</button></p>
+	</form>
+
+</body>
+</html>
+
+<script type="text/javascript" src="../node_modules/jquery/src/jquery.js">
+
+const Datastore = require('nedb');
+const db = new Datastore({
+  filename: 'data/data.db',
+  autoload: true
+});
+
+$("#postButton").on("click", function(e) {
+	console.log(e);
+  // const body = $("input[name=body]");
+  // db.insert({body: body});
+});
+
+db.find({body: 'aaa'}, function(err, name){
+	console.log(name);
+});
+
+</script>
