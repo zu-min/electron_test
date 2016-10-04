@@ -33,7 +33,14 @@ app.on('will-quit',function(){
 
 app.on('ready', function(){
   Menu.setApplicationMenu(menu);
-  mainWindow = new BrowserWindow({width: 800, heigth: 600, 'node-integration': false});
+  // mainWindow = new BrowserWindow({
+  //   width: 800,
+  //   heigth: 600,
+  //   webPreferences: {
+  //     nodeIntegration: false
+  //   }
+  // });
+  mainWindow = new BrowserWindow({width: 800, heigth: 600});
 
   // 開発者ツール
   mainWindow.openDevTools();

@@ -8,15 +8,16 @@
   <p>Hello world!</p>
   <p>hogehoge hugahuga</p>
 
-	<form>
-		<p><input type="text" name="body"></p>
-		<p><button id="postButton">送信</button></p>
+	<form name="form1">
+		<p><input type="text" name="_name" value=""></p>
+		<p><button id="postButton">登録</button><button id="removeButton">削除</button></p>
 	</form>
 
 </body>
 </html>
 
-<script type="text/javascript" src="../node_modules/jquery/src/jquery.js">
+<script type="text/javascript">
+window.jQuery = window.$ = require("../node_modules/jquery");
 
 const Datastore = require('nedb');
 const db = new Datastore({
@@ -25,13 +26,21 @@ const db = new Datastore({
 });
 
 $("#postButton").on("click", function(e) {
-	console.log(e);
-  // const body = $("input[name=body]");
-  // db.insert({body: body});
+  const elements = document.form1._name;
+  if(!elements.value) return;
+  db.insert({name: elements.value});
 });
 
-db.find({body: 'aaa'}, function(err, name){
-	console.log(name);
+db.find({}, function(err, docs){
+	$.each(docs, function(){
+    console.log(this);
+  });
+});
+
+$("#removeButton").on("click", function(e) {
+  db.remove({}, { multi: true }, function(err, numRemoved){
+    console.log('remove');
+  });
 });
 
 </script>
